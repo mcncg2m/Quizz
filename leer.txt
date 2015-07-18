@@ -1,0 +1,9 @@
+﻿Hola,
+
+he tenido que realizar commit de mas debido a un fallo de sintaxis en el package.json para compatibilizarlo con Heroku..
+
+
+
+https://jcquiz-2015.herokuapp.com/
+
+https://github.com/mcncg2m/Quizz

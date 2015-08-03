@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
 var methodOverride = require('method-override');
+
+var session = require('express-session');
+
 var routes = require('./routes/index');
 // modificado -> var users = require('./routes/users');
 
@@ -22,9 +25,19 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
+app.use(cookieParser('mcncg2m'));
+app.use(session());
+//app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next){
+  if (!req.path.match(/\/login|\/logout/)){
+    req.session.redir = req.path;
+  }
+  res.locals.session = req.session;
+  next();
+});
 
 app.use('/', routes);
 // modificado -> app.use('/users', users);

@@ -39,6 +39,21 @@ app.use(function(req, res, next){
   next();
 });
 
+
+app.use(function(req, res, next) {
+  var nowInMillis = (new Date).getTime();
+console.log(nowInMillis);
+  if (req.session.user && (nowInMillis - req.session.user.loginDate) > 120000) {
+    delete req.session.user;
+    res.redirect('/login');
+  }
+
+  next();
+});
+
+
+
+
 app.use('/', routes);
 // modificado -> app.use('/users', users);
 
